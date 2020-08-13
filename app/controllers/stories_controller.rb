@@ -7,10 +7,13 @@ class StoriesController < ApplicationController
     @stories = Story.all
   end
 
+  
+
   # GET /stories/1
   # GET /stories/1.json
   def show
     @stories = Story.where(user_id: current_user.id)
+    @users = User.all
   end
 
   # GET /stories/new
@@ -20,6 +23,11 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
+    if current_user.admin? || current_user
+
+    else
+      redirect_to root_path, alert: 'No puedes acceder a esta pagina.'
+    end
   end
 
   # POST /stories

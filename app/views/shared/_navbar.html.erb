@@ -21,7 +21,9 @@
           <% if current_user %>
             <li><%=link_to 'Create PicStory', new_story_path %></li>
             <li><%=link_to 'My PicStories', story_path(current_user.id) %></li>
-            <li><a href="#">'My Profile'</a></li>
+            <% if current_user.admin?%>
+            <li><%=link_to 'Panel', "/users/#{current_user.id}" %></li>
+            <%end%>
             <li role="separator" class="divider"></li>
             <li><%=link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
 
