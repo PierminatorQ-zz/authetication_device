@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
   # GET /stories
   # GET /stories.json
   def index
@@ -10,6 +10,7 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
+    @stories = Story.where(user_id: current_user.id)
   end
 
   # GET /stories/new
@@ -24,7 +25,8 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
-    @story = Story.new(story_params)
+    @story = Story.new(story_params.merge(user: current_user))
+    
 
     respond_to do |format|
       if @story.save
@@ -71,4 +73,6 @@ class StoriesController < ApplicationController
     def story_params
       params.require(:story).permit(:title, :picture, :content)
     end
+
+    
 end
