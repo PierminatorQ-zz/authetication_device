@@ -1,0 +1,30 @@
+
+
+<% if current_user.admin?%>
+<h4>Tu usuario es</h4>
+<h3>  <%= current_user.email%> </h3>
+
+<h1>Usuarios</h1>
+<table class="table table-bordered">
+<thead> 
+<tr>
+    <th>nombre</th>
+    <th>email</th>
+    <th>admin</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+    <% User.all.each do |u|%>
+        <td> <%= u.name%> </td>
+        <td> <%= u.email%> </td>
+        <td> <%= u.admin %> </td>
+</tr>
+    <%end%>
+</tbody>
+</table>
+<%else%>
+<h4>Tu usuario es</h4>
+<h3><%= current_user.email%></h3> 
+<%end%>
