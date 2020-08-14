@@ -19,11 +19,7 @@
     <% User.all.each do |u|%>
         <td> <%= u.name%> </td>
         <td> <%= u.email%> </td>
-<<<<<<< HEAD
         <td> <%= u.admin %> </td>
-=======
-        <td> <%= check_box_tag(:admin) %> </td>
->>>>>>> a197ad530763519d3407f064dcfdf8f85efc5516
 </tr>
     <%end%>
 </tbody>
